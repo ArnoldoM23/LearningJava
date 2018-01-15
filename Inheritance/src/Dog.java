@@ -15,7 +15,22 @@ public class Dog extends Animal {
 
     @Override
     public void eat() {
-        super.eat();
         System.out.println("I eat everything");
+    }
+
+    public void walk() {
+        System.out.println("Dog is walking");
+        super.move(5); //when using super instead of calling the method move it will call the move method from the main class
+    }
+
+    public void run() {
+        System.out.println("Dog is running");
+        move(10);
+    }
+
+    @Override
+    public void move(int speed) {
+        System.out.println("Dog has to move at speed " + speed);
+        super.move(speed);
     }
 }
