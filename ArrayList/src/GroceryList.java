@@ -23,4 +23,8 @@ public class GroceryList {
     public void removeItem(int position) {
         groceryList.remove(position);
     }
+
+    public String findItem(String item) {
+        return groceryList.get(groceryList.indexOf(item));
+    }
 }

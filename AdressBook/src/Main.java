@@ -3,13 +3,12 @@ import java.util.Scanner;
 public class Main {
 
     private static Scanner scanner = new Scanner(System.in);
-
-    private static GroceryList groceryList = new GroceryList();
+    private static AddressBook addressBook = new AddressBook();
 
     public static void main(String[] args) {
+
         boolean quit = false;
         int choice = 0;
-        printInstructions();
 
         while (!quit) {
             System.out.println("Enter yout choice:" );
@@ -21,19 +20,19 @@ public class Main {
                     printInstructions();
                     break;
                 case 1:
-                    groceryList.printGroceryList();
+                    addressBook.printContactList();
                     break;
                 case 2:
-                    addItem();
+                    addContact();
                     break;
                 case 3:
-                    modifyItem();
+                    modifyContact();
                     break;
                 case 4:
-                    removeItem();
+                    removeContact();
                     break;
                 case 5:
-                    searchForItem();
+                    searchContact();
                     break;
                 case 6:
                     quit = true;
@@ -42,7 +41,10 @@ public class Main {
         }
     }
 
-    public static void printInstructions(){
+
+
+
+    private static void printInstructions(){
         System.out.println("\nPress");
         System.out.println("\t 0 - To print choice options");
         System.out.println("\t 1 - To print the list of grocery items");
@@ -53,37 +55,29 @@ public class Main {
         System.out.println("\t 6 - To quit application");
     }
 
-    public static void addItem() {
-        System.out.println("Please enter and item");
-        groceryList.addGroceryItem(scanner.nextLine());
-    }
 
-    public static void removeItem() {
-        System.out.println("Enter item you want to remove");
-        int itemNumber = scanner.nextInt();
+    private static  void addContact() {
+        String name = scanner.nextLine();
         scanner.nextLine();
-        groceryList.removeItem(itemNumber -1);
+        int phone = scanner.nextInt();
+        Contact newContact = new Contact(name, phone);
+        addressBook.addContact(newContact);
     }
 
-    public static void modifyItem() {
-        System.out.println("Enter item you want to replace");
-        int itemNumber = scanner.nextInt();
+    private static void modifyContact() {
+        String name = scanner.nextLine();
         scanner.nextLine();
-        System.out.println("Enter new item");
-        String newItem = scanner.nextLine();
-
-        groceryList.modifyGroceryItem(itemNumber, newItem);
+        int phone = scanner.nextInt();
+        addressBook.updateContact(name, phone);
     }
 
-    public static void searchForItem() {
-        System.out.println("Enter item you want to search");
-        String searchItem = scanner.nextLine();
-        if(groceryList.findItem(searchItem) != null){
-            System.out.println("item found " + searchItem);
-        } else {
-            System.out.println("Item is not in the list");
-        }
-
+    private static void removeContact() {
+        String name = scanner.nextLine();
+        addressBook.removeContact(name);
     }
 
+    private static void searchContact() {
+        String name = scanner.nextLine();
+        addressBook.findContact(name);
+    }
 }
